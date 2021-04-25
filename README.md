@@ -1,7 +1,7 @@
 # RestaurantOpeningHoursTask
 ### The default json payload gets the job done, but it could be better refactored by making it much simpler using this format: "monday": [ { "type": "opening_hours", "openhour": 32400, "closehour":72000 } ],
 
-## It is expected that the json payload should align with the above structure, as it is meant to reduce executive time and optimise server resources usage.
+## It is expected that the json payload should align with the above structure, as it is meant to reduce execution time and optimise server resources usage.
 
 ## This project is created with C# programming language, on a Dotnet Core Framework
 
