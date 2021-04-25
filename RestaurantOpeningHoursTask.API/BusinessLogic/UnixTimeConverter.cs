@@ -9,29 +9,29 @@ namespace RestaurantOpeningHoursTask.API.BusinessLogic
     public class UnixTimeConverter
     {
         /// <summary>  
-        /// this action get the UTC time from the unix time 
+        /// this action get the UTC timestamp from the unix time 
         /// </summary>  
         public static string UnixTimeStampToShortTimeString(double unixTimeStamp)
         {
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime.ToShortTimeString();
         }
         /// <summary>  
-        /// this handles the conversion for all the restaurant opening hour models
+        /// this method handles the conversion for all the restaurant opening hours model
         /// </summary> 
         public OpeningAndClosingHoursResponse UnixConverter(OpeningAndClosingHoursRequest list)
         {
 
             return new OpeningAndClosingHoursResponse
             {
-                Sunday = string.Format("Sunday: {0}", PrintTime(FormattedTimeSorteer(list.Sunday, list.Saturday, list.Monday, "Saturday", "Monday"))),
-                Monday = string.Format("Monday: {0}", PrintTime(FormattedTimeSorteer(list.Monday, list.Sunday, list.Tuesday, "Sunday", "Tuesday"))),
-                Tuesday = string.Format("Tuesday: {0}", PrintTime(FormattedTimeSorteer(list.Tuesday, list.Monday, list.Wednesday, "Monday", "Wednesday"))),
-                Wednesday = string.Format("Wednesday: {0}", PrintTime(FormattedTimeSorteer(list.Wednesday, list.Tuesday, list.Thursday, "Tuesday", "Thursday"))),
-                Thursday = string.Format("Thursday: {0}", PrintTime(FormattedTimeSorteer(list.Thursday, list.Wednesday, list.Friday, "Wednesday", "Friday"))),
-                Friday = string.Format("Friday: {0}", PrintTime(FormattedTimeSorteer(list.Friday, list.Thursday, list.Saturday, "Thursday", "Saturday"))),
-                Saturday = string.Format("Saturday: {0}", PrintTime(FormattedTimeSorteer(list.Saturday, list.Friday, list.Sunday, "Friday", "Sunday"))),
+                Sunday = string.Format("Sunday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Sunday, list.Saturday, list.Monday, "Saturday", "Monday"))),
+                Monday = string.Format("Monday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Monday, list.Sunday, list.Tuesday, "Sunday", "Tuesday"))),
+                Tuesday = string.Format("Tuesday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Tuesday, list.Monday, list.Wednesday, "Monday", "Wednesday"))),
+                Wednesday = string.Format("Wednesday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Wednesday, list.Tuesday, list.Thursday, "Tuesday", "Thursday"))),
+                Thursday = string.Format("Thursday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Thursday, list.Wednesday, list.Friday, "Wednesday", "Friday"))),
+                Friday = string.Format("Friday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Friday, list.Thursday, list.Saturday, "Thursday", "Saturday"))),
+                Saturday = string.Format("Saturday: {0}", PrintReadableTime(FormattedTimeSorteer(list.Saturday, list.Friday, list.Sunday, "Friday", "Sunday"))),
 
             };
 
@@ -39,7 +39,7 @@ namespace RestaurantOpeningHoursTask.API.BusinessLogic
         }
 
         /// <summary>  
-        /// get the opening time readable timestamp
+        /// fetch the opening time readable timestamp
         /// </summary> 
 
         public List<Time> FormattedTimeSorteer(List<OpenHourPayload> openHourModel, List<OpenHourPayload> previousDay, List<OpenHourPayload> nextDay, string previousDayAsWord, string nextDayAsWord)
@@ -107,14 +107,14 @@ namespace RestaurantOpeningHoursTask.API.BusinessLogic
         /// <summary>  
         /// Prints the time stamp for easy read.
         /// </summary> 
-        public string PrintTime(List<Time> timer)
+        public string PrintReadableTime(List<Time> timer)
         {
 
             if (timer == null || timer.Count < 1) return "Closed";
             if (timer.Count == 1) return string.Format("{0} - {1}", timer.First().OpenTime, timer.First().CloseTime);
             else
             {
-                var value = "";
+                var value = string.Empty;
                 foreach (var item in timer)
                 {
                     value = string.Format("{0} - {1},", item.OpenTime, item.CloseTime);
