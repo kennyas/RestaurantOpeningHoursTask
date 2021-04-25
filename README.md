@@ -1,5 +1,5 @@
 # RestaurantOpeningHoursTask
-### The default json payload gets the works done, but it could be better refactored by making it much simpler "monday": [ { "type": "opening_hours", "openhour": 32400, "closehour":72000 } ],
+### The default json payload gets the job done, but it could be better refactored by making it much simpler using this format: "monday": [ { "type": "opening_hours", "openhour": 32400, "closehour":72000 } ],
 
 ## It is expected that the json payload should align with the above structure, as it is meant to reduce executive time and optimise server resources usage.
 
@@ -16,4 +16,4 @@
 <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.3" />
 <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.3" />
 ```
-### Kindly endeavour to run a dotnet restore on this solution.
+### Kindly run a dotnet restore on this solution.
